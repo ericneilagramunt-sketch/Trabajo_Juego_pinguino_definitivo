@@ -9,6 +9,14 @@ public class Inventario {
        dados = new ArrayList<>();
        dados.add(new Dado(1,6)); 
    }
+public int tirarDado() {
+       return dados.get(0).tirar();
+   }
+
+public void agregarPez() {
+       if (peces < 2) peces++;
+   }
+
 
 
 
