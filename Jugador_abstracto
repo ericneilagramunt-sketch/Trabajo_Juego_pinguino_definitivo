@@ -21,3 +21,20 @@ public void mover(int pasos) {
     return inventario.tirarDado();
    }
 
+public String getNombre() { 
+return nombre; 
+}
+
+   public int getPosicion() { 
+return posicion;
+ }
+   
+public void setPosicion(int pos) { 
+posicion = pos; 
+}
+
+   public Inventario getInventario() {
+ return inventario; }
+}
+
+
