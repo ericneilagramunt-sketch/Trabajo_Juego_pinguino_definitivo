@@ -1,1 +1,6 @@
+import java.util.Random;
+public class Dado {
+   private int min;
+   private int max;
+
 
