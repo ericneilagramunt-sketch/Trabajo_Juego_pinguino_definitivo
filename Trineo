@@ -1,1 +1,6 @@
+public class Trineo extends Casilla {
+
+   public Trineo(int pos) {
+       super(pos);
+   }
 
