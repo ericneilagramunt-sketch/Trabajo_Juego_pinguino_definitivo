@@ -1,1 +1,8 @@
+import java.util.*;
+
+public class Evento extends Casilla {
+
+   public Evento(int pos) {
+       super(pos);
+   }
 
