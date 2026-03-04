@@ -1,1 +1,6 @@
+public class Agujero extends Casilla {
+
+   public Agujero(int pos) {
+       super(pos);
+   }
 
