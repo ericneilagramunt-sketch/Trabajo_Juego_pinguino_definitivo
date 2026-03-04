@@ -11,4 +11,26 @@ public class Evento extends Casilla {
    Random r = new Random();
    int evento = r.nextInt(4);
 
+switch (evento) {
+           case 0:
+               jugador.getInventario().agregarPez();
+               System.out.println("Has conseguido un pez!");
+               break;
+           case 1:
+               jugador.getInventario().agregarbolaNieve(r.nextInt(3) + 1);
+               System.out.println("Has conseguido bolas de nieve!");
+               break;
+           case 2:
+               jugador.getInventario().agregarDado(new Dado(5, 10));
+               System.out.println("Dado rápido conseguido!");
+               break;
+           case 3:
+               jugador.getInventario().agregarDado(new Dado(1, 3));
+               System.out.println("Dado lento conseguido!");
+               break;
+       }
+   }
+}
+
+
 
