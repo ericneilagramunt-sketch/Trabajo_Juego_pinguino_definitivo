@@ -3,5 +3,12 @@ public class Inventario {
    private int peces;
    private int bolaNieve;
    private ArrayList<Dado> dados;
+  public Inventario() {
+       peces = 0;
+       bolas = 0;
+       dados = new ArrayList<>();
+       dados.add(new Dado(1,6)); 
+   }
+
 
 
