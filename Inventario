@@ -1,1 +1,7 @@
+import java.util.*;
+public class Inventario {
+   private int peces;
+   private int bolaNieve;
+   private ArrayList<Dado> dados;
+
 
