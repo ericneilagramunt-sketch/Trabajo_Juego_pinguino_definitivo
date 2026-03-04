@@ -5,3 +5,9 @@ public abstract class Jugador {
    protected int posicion;
    protected Inventario inventario;
 
+public Jugador(String nombre, String color) {
+   this.nombre = nombre;
+   this.color = color;
+   this.posicion = 0;
+   this.inventario = new Inventario();
+   }
