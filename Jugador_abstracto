@@ -11,3 +11,9 @@ public Jugador(String nombre, String color) {
    this.posicion = 0;
    this.inventario = new Inventario();
    }
+
+public void mover(int pasos) {
+       posicion += pasos;
+       if (posicion < 0) posicion = 0;
+   }
+
