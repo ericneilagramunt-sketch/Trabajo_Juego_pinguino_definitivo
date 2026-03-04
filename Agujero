@@ -3,4 +3,12 @@ public class Agujero extends Casilla {
    public Agujero(int pos) {
        super(pos);
    }
+   @Override
+   public void realizarAccion(Jugador jugador) {
+
+   System.out.println("Caes en un agujero! Retrocedes 3 posiciones.");
+   jugador.mover(-3);
+   }
+}
+
 
