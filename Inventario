@@ -5,7 +5,7 @@ public class Inventario {
    private ArrayList<Dado> dados;
   public Inventario() {
        peces = 0;
-       bolas = 0;
+       bolaNieve = 0;
        dados = new ArrayList<>();
        dados.add(new Dado(1,6)); 
    }
@@ -16,6 +16,24 @@ public int tirarDado() {
 public void agregarPez() {
        if (peces < 2) peces++;
    }
+public boolean usarPez() {
+       if (peces > 0) {
+           peces--;
+           return true;
+       }
+       return false;
+   }
+
+   public void agregarbolaNieve(int n) {
+       bolaNieve += n;
+       if (bolas > 6) bolaNieve = 6;
+   }
+
+   public void agregarDado(Dado d) {
+       if (dados.size() < 3)
+           dados.add(d);
+   }
+}
 
 
 
