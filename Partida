@@ -1,12 +1,13 @@
 package reto;
-import java.util.*;
-public class partida {
+import java.util.Random;
+import java.util.ArrayList;
+public class Partida {
   private tablero tablero;
-  private ArrayList<jugador> jugadores;
+  private ArrayList <Jugador> jugadores;
   private int turno;
   private boolean finalizada;
   private jugador ganador;
-  public partida(tablero tablero, ArrayList<jugador> jugadores) {
+  public Partida(tablero tablero, ArrayList<Jugador> jugadores) {
       this.tablero = tablero;
       this.jugadores = jugadores;
       turno = 0;
