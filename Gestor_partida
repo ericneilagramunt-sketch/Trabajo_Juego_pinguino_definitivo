@@ -25,5 +25,32 @@ public class Gestor_partida {
 
 	       partida = new partida(tablero, jugadores);
 	   }
+  public void jugar() {
+
+	       while (!partida.isFinalizada()) {
+
+	           jugador actual = partida.getJugadorActual();
+
+	           System.out.println("\nTurno de: " + actual.getNombre());
+
+	           int tirada = actual.tirarDado();
+	           System.out.println("Ha sacado: " + tirada);
+
+	           actual.mover(tirada);
+
+	           partida.getTablero().activarCasilla(actual);
+
+	           partida.siguienteTurno();
+
+	           if (actual.getPosicion() >= partida.getTablero().getSize()) {
+	               partida.setGanador(actual);
+	               partida.setFinalizada(true);
+	           }
+	       }
+
+	       System.out.println("Ganador: " + partida.getGanador().getNombre());
+	   }
+
+}
 
 	
