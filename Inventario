@@ -29,7 +29,7 @@ public class Inventario {
       bolas += n;
       if (bolas > 6) bolas = 6;
   }
-  public void agregarDado(dado d) {
+  public void agregarDado(Dado d) {
       if (dados.size() < 3)
           dados.add(d);
   }
