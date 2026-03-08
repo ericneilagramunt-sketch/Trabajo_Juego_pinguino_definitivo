@@ -2,27 +2,96 @@ package reto;
 import java.util.*;
 import java.util.Random;
 import java.util.ArrayList;
-public class Tablero {
-  private ArrayList<Casilla> casillas;
-  public Tablero(int size) {
-      casillas = new ArrayList<>();
-      Random r = new Random();
-      for (int i = 0; i < size; i++) {
-          int tipo = r.nextInt(5);
-          switch (tipo) {
-              case 0: casillas.add(new Oso(i)); break;
-              case 1: casillas.add(new Agujero(i)); break;
-              case 2: casillas.add(new Trineo(i)); break;
-              case 3: casillas.add(new Evento(i)); break;
-              default: casillas.add(new Suelo_quebradizo(i)); break;
-          }
-      }
-  }
-  public void activarCasilla(Jugador j) {
-      casillas.get(j.getPosicion()).realizarAccion(j);
-  }
-  public int getSize() {
-      return casillas.size();
-  }
-}
+public class tablero {
+    private ArrayList<casilla> casillas;
 
+    public tablero(int size) {
+        casillas = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i < size; i++) {
+            int tipo = r.nextInt(5);
+            switch (tipo) {
+                case 0:  casillas.add(new oso(i));               break;
+                case 1:  casillas.add(new agujero(i));           break;
+                case 2:  casillas.add(new trineo(i));            break;
+                case 3:  casillas.add(new evento(i));            break;
+                default: casillas.add(new suelo_quebradizo(i));  break;
+            }
+        }
+
+        for (casilla c : casillas) {
+            if (c instanceof trineo)  ((trineo)  c).setTablero(this);
+            if (c instanceof agujero) ((agujero) c).setTablero(this);
+            if (c instanceof evento)  ((evento)  c).setTablero(this);
+        }
+    }
+
+    public void activarCasilla(jugador j) {
+        int pos = j.getPosicion();
+        if (pos >= 0 && pos < casillas.size()) {
+            casillas.get(pos).realizarAccion(j);
+        }
+    }
+
+    public int getSize() { return casillas.size(); }
+
+    public String getTipoCasilla(int pos) {
+        if (pos < 0 || pos >= casillas.size()) return "fuera";
+        return casillas.get(pos).getClass().getSimpleName();
+    }
+
+    public int buscarProximoTrineo(int posActual) {
+        for (int i = posActual + 1; i < casillas.size(); i++) {
+            if (casillas.get(i) instanceof trineo) return i;
+        }
+        return -1;
+    }
+
+    public int buscarAgujeroAnterior(int posActual) {
+        for (int i = posActual - 1; i >= 0; i--) {
+            if (casillas.get(i) instanceof agujero) return i;
+        }
+        return 0;
+    }
+
+    public ArrayList<Integer> posicionesIntermedias(int desde, int hasta) {
+        ArrayList<Integer> posiciones = new ArrayList<>();
+        int inicio = Math.min(desde, hasta);
+        int fin    = Math.max(desde, hasta);
+        for (int i = inicio + 1; i <= fin; i++) posiciones.add(i);
+        return posiciones;
+    }
+
+    public void mostrarTablero(ArrayList<jugador> jugadores) {
+        System.out.println("\n=== TABLERO (50 casillas) ===");
+        System.out.println("O=Oso  A=Agujero  T=Trineo  E=Evento  S=SueloQ");
+        System.out.println();
+
+        for (int i = 0; i < casillas.size(); i++) {
+            String tipo = casillas.get(i).getClass().getSimpleName();
+            char simbolo = obtenerSimbolo(tipo);
+
+            StringBuilder jugadoresAqui = new StringBuilder();
+            for (jugador j : jugadores) {
+                if (j.getPosicion() == i) {
+                    jugadoresAqui.append("[").append(j.getNombre().charAt(0)).append("]");
+                }
+            }
+
+            System.out.printf("%2d:%c%s ", i, simbolo, jugadoresAqui.toString());
+            if ((i + 1) % 10 == 0) System.out.println();
+        }
+        System.out.println("\n============================");
+    }
+
+    private char obtenerSimbolo(String tipo) {
+        switch (tipo) {
+            case "oso":              return 'O';
+            case "agujero":         return 'A';
+            case "trineo":           return 'T';
+            case "evento":           return 'E';
+            case "suelo_quebradizo": return 'S';
+            default:                 return '?';
+        }
+    }
+}
