@@ -1,15 +1,38 @@
 package reto;
-public class Agujero extends Casilla {
+public class agujero extends casilla {
 
-   public Agujero(int pos) {
-       super(pos);
-   }
-   @Override
-   public void realizarAccion(Jugador jugador) {
+    private tablero tablero;
 
-   System.out.println("Caes en un agujero! Retrocedes 3 posiciones.");
-   jugador.mover(-3);
-   }
+    public agujero(int pos) {
+        super(pos);
+        this.tablero = null;
+    }
+
+    public agujero(int pos, tablero tablero) {
+        super(pos);
+        this.tablero = tablero;
+    }
+
+    public void setTablero(tablero t) {
+        this.tablero = t;
+    }
+
+    @Override
+    public void realizarAccion(jugador jugador) {
+        System.out.println("¡Caes en un agujero en el hielo!");
+
+        if (tablero != null) {
+            int agujeroAnterior = tablero.buscarAgujeroAnterior(jugador.getPosicion());
+            if (agujeroAnterior < jugador.getPosicion() && agujeroAnterior != 0) {
+                System.out.println("   Te hundes hasta el agujero anterior en casilla " + agujeroAnterior + ".");
+                jugador.setPosicion(agujeroAnterior);
+            } else {
+                System.out.println("   No hay agujero anterior. Retrocedes 3 posiciones.");
+                jugador.mover(-3);
+            }
+        } else {
+            System.out.println("   Retrocedes 3 posiciones.");
+            jugador.mover(-3);
+        }
+    }
 }
-
-
