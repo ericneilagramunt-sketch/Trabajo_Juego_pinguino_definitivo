@@ -1,39 +1,39 @@
+package reto;
 import java.util.*;
-public class Inventario {
-   private int peces;
-   private int bolaNieve;
-   private ArrayList<Dado> dados;
-  public Inventario() {
-       peces = 0;
-       bolaNieve = 0;
-       dados = new ArrayList<>();
-       dados.add(new Dado(1,6)); 
-   }
-public int tirarDado() {
-       return dados.get(0).tirar();
-   }
-
-public void agregarPez() {
-       if (peces < 2) peces++;
-   }
-public boolean usarPez() {
-       if (peces > 0) {
-           peces--;
-           return true;
-       }
-       return false;
-   }
-
-   public void agregarbolaNieve(int n) {
-       bolaNieve += n;
-       if (bolas > 6) bolaNieve = 6;
-   }
-
-   public void agregarDado(Dado d) {
-       if (dados.size() < 3)
-           dados.add(d);
-   }
+import java.util.ArrayList;
+public class inventario {
+  private int peces;
+  private int bolas;
+  private ArrayList <dado> dados;
+  public inventario() {
+      peces = 0;
+      bolas = 0;
+      dados = new ArrayList<>();
+      dados.add(new dado(1,6)); 
+  }
+  public int tirarDado() {
+      return dados.get(0).tirar();
+  }
+  public void agregarPez() {
+      if (peces < 2) peces++;
+  }
+  public boolean usarPez() {
+      if (peces > 0) {
+          peces--;
+          return true;
+      }
+      return false;
+  }
+  public void agregarBolas(int n) {
+      bolas += n;
+      if (bolas > 6) bolas = 6;
+  }
+  public void agregarDado(dado d) {
+      if (dados.size() < 3)
+          dados.add(d);
+  }
 }
+
 
 
 
