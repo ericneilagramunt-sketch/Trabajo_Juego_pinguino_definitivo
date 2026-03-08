@@ -6,6 +6,11 @@ public class Dado {
        this.min = min;
        this.max = max;
    }
+ public int tirar() {
+       Random r = new Random();
+       return r.nextInt(max - min + 1) + min;
+   }
+}
 
 
 
