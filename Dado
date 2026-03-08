@@ -1,9 +1,9 @@
 package reto;
 import java.util.Random;
-public class dado {
+public class Dado {
   private int min;
   private int max;
-  public dado(int min, int max) {
+  public Dado(int min, int max) {
       this.min = min;
       this.max = max;
   }
