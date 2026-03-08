@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Gestor_partida {
 
-	   private partida partida;
+	   private Partida partida;
 	   private Scanner sc = new Scanner(System.in);
 
 	   public void nuevaPartida() {
