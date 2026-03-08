@@ -20,5 +20,11 @@ public jugador getJugadorActual() {
       if (turno >= jugadores.size())
           turno = 0;
   }
+ public tablero getTablero() { return tablero; }
+  public boolean isFinalizada() { return finalizada; }
+  public void setFinalizada(boolean f) { finalizada = f; }
+  public void setGanador(jugador j) { ganador = j; }
+  public jugador getGanador() { return ganador; }
+}
 
 
