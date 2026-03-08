@@ -9,4 +9,14 @@ public SueloQuebradizo(int pos) {
 
        Random r = new Random();
        boolean seRompe = r.nextBoolean();
+  if (seRompe) {
+           System.out.println("¡El suelo se rompe bajo tus pies!");
+           System.out.println("Vuelves al inicio...");
+           jugador.setPosicion(0);
+       } else {
+           System.out.println("El suelo cruje pero resiste.");
+       }
+   }
+}
+
 
