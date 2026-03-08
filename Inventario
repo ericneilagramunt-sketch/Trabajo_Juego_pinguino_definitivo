@@ -1,11 +1,11 @@
 package reto;
 import java.util.*;
 import java.util.ArrayList;
-public class inventario {
+public class Inventario {
   private int peces;
   private int bolas;
-  private ArrayList <dado> dados;
-  public inventario() {
+  private ArrayList <Dado> dados;
+  public Inventario() {
       peces = 0;
       bolas = 0;
       dados = new ArrayList<>();
