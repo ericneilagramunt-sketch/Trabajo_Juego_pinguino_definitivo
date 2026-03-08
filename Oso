@@ -1,0 +1,16 @@
+package reto;
+public class Oso extends Casilla {
+	   public Oso(int pos) {
+	       super(pos);
+	   }
+	   @Override
+	   public void realizarAccion(Jugador jugador) {
+	       if (jugador.getInventario().usarPez()) {
+	           System.out.println("Has usado un pez para evitar al oso!");
+	       } else {
+	           System.out.println("El oso te devuelve al inicio!");
+	           jugador.setPosicion(0);
+	       }
+	   }
+}
+
