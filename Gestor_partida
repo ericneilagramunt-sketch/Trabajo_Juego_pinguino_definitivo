@@ -1,1 +1,29 @@
-yjyjyjyjy
+package reto;
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Gestor_partida {
+
+	   private partida partida;
+	   private Scanner sc = new Scanner(System.in);
+
+	   public void nuevaPartida() {
+
+	       System.out.println("Nombre jugador 1:");
+	       String j1 = sc.nextLine();
+
+	       System.out.println("Nombre jugador 2:");
+	       String j2 = sc.nextLine();
+
+	       pinguino p1 = new pinguino(j1, "Azul");
+	       pinguino p2 = new pinguino(j2, "Rojo");
+
+	       ArrayList <Jugador> jugadores = new ArrayList<>();
+	       jugadores.add(p1);
+	       jugadores.add(p2);
+
+	       tablero tablero = new tablero(50);
+
+	       partida = new partida(tablero, jugadores);
+	   }
+
+	
