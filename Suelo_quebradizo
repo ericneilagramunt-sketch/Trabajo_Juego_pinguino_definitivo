@@ -1,8 +1,8 @@
 package reto;
 import java.util.Random;
 
-public class SueloQuebradizo extends Casilla {
-public SueloQuebradizo(int pos) {
+public class Suelo_quebradizo extends Casilla {
+public Suelo_quebradizo(int pos) {
        super(pos);
    }
 
