@@ -1,0 +1,77 @@
+package reto;
+
+import java.util.ArrayList;
+
+public class foca extends jugador {
+
+    private int turnosBloqueada;
+
+    public foca() {
+        super("Foca (CPU)", "Gris");
+        this.turnosBloqueada = 0;
+    }
+
+    public boolean estaBloqueada() { return turnosBloqueada > 0; }
+
+    public void bloquear() {
+        turnosBloqueada = 2;
+        System.out.println("   La foca ha sido alimentada. Queda bloqueada 2 turnos.");
+    }
+
+    public void reducirBloqueo() {
+        if (turnosBloqueada > 0) {
+            turnosBloqueada--;
+            System.out.println("   [Foca bloqueada. Turnos restantes: " + turnosBloqueada + "]");
+        }
+    }
+
+    public int getTurnosBloqueada() { return turnosBloqueada; }
+
+  
+    public void turnoIA(ArrayList<jugador> jugadoresHumanos, tablero tablero) {
+        System.out.println("\n-----------------------------------");
+        System.out.println(">> Turno de la FOCA (CPU)");
+
+        if (estaBloqueada()) {
+            reducirBloqueo();
+            System.out.println(">> La foca pierde su turno por estar bloqueada.");
+            System.out.println("-----------------------------------");
+            return;
+        }
+
+        int posAnterior = posicion;
+        int tirada = inventario.tirarDado();
+        System.out.println(">> La foca tira el dado: " + tirada);
+        mover(tirada);
+        System.out.println(">> La foca avanza de casilla " + posAnterior + " a casilla " + posicion);
+
+        ArrayList<Integer> intermedias = tablero.posicionesIntermedias(posAnterior, posicion - 1);
+        for (jugador j : jugadoresHumanos) {
+            if (intermedias.contains(j.getPosicion())) {
+                System.out.println(">> La foca pasa por la casilla de " + j.getNombre() + "!");
+                System.out.println("   Le quita la mitad del inventario.");
+                j.getInventario().perderMitadInventario();
+                mostrarInventarioReducido(j);
+            }
+        }
+        for (jugador j : jugadoresHumanos) {
+            if (j.getPosicion() == posicion) {
+                System.out.println(">> La foca COINCIDE con " + j.getNombre() + " en casilla " + posicion + "!");
+                System.out.println("   Le golpea con la cola y lo envia al agujero anterior.");
+                int agujero = tablero.buscarAgujeroAnterior(j.getPosicion());
+                j.setPosicion(agujero);
+                System.out.println("   " + j.getNombre() + " retrocede a casilla " + agujero + ".");
+                j.getInventario().perderMitadInventario();
+                mostrarInventarioReducido(j);
+            }
+        }
+
+        System.out.println(">> Foca en casilla: " + posicion);
+        System.out.println("-----------------------------------");
+    }
+
+    private void mostrarInventarioReducido(jugador j) {
+        System.out.println("   Inventario de " + j.getNombre() + " tras el ataque:");
+        j.getInventario().mostrar();
+    }
+}
