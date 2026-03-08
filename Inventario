@@ -100,6 +100,37 @@ public class Inventario {
         }
     }
 
+public String perderObjetoAleatorio() {
+        Random r = new Random();
+        ArrayList<String> opciones = new ArrayList<>();
+
+
+        if (peces > 0) opciones.add("pez");
+        if (bolas > 0) opciones.add("bola");
+        if (dados.size() > 1) opciones.add("dado");
+        if (opciones.isEmpty()) return "nada";
+
+
+        String elegido = opciones.get(r.nextInt(opciones.size()));
+        switch (elegido) {
+            case "pez":  peces--;  return "un pez";
+            case "bola": bolas--;  return "una bola de nieve";
+            case "dado":
+                dados.remove(dados.size() - 1);
+                return "un dado extra";
+        }
+        return "nada";
+    }
+
+
+    public void mostrar() {
+        System.out.println(" Peces       : " + peces + " / 2");
+        System.out.println(" Bolas nieve : " + bolas + " / 6");
+        System.out.println(" Dados        : " + dados.size() + " / 3");
+    }
+}
+
+
 
 
 
