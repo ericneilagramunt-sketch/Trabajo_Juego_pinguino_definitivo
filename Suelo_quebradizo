@@ -3,3 +3,10 @@ import java.util.Random;
 public SueloQuebradizo(int pos) {
        super(pos);
    }
+
+   @Override
+   public void realizarAccion(Jugador jugador) {
+
+       Random r = new Random();
+       boolean seRompe = r.nextBoolean();
+
