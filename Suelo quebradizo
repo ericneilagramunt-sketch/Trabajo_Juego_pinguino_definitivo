@@ -1,2 +1,5 @@
 import java.util.Random;
 
+public SueloQuebradizo(int pos) {
+       super(pos);
+   }
