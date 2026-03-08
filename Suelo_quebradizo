@@ -1,24 +1,25 @@
 package reto;
-import java.util.Random;
+public class suelo_quebradizo extends casilla {
 
-public class Suelo_quebradizo extends Casilla {
-public Suelo_quebradizo(int pos) {
-       super(pos);
-   }
+    public suelo_quebradizo(int pos) {
+        super(pos);
+    }
 
-   @Override
-   public void realizarAccion(Jugador jugador) {
+    @Override
+    public void realizarAccion(jugador jugador) {
+        int total = jugador.getInventario().totalObjetos();
+        System.out.println("¡Pisas suelo quebradizo! (Tienes " + total + " objeto(s) en inventario)");
 
-       Random r = new Random();
-       boolean seRompe = r.nextBoolean();
-  if (seRompe) {
-           System.out.println("¡El suelo se rompe bajo tus pies!");
-           System.out.println("Vuelves al inicio...");
-           jugador.setPosicion(0);
-       } else {
-           System.out.println("El suelo cruje pero resiste.");
-       }
-   }
+        if (total > 5) {
+            System.out.println("¡Demasiado peso! El suelo cede... Vuelves al inicio.");
+            jugador.setPosicion(0);
+        } else if (total > 0) {
+            System.out.println("El suelo cruje... pierdes tu turno.");
+            jugador.setPierdeTurno(true);
+        } else {
+            System.out.println("Sin peso extra, el suelo aguanta. Pasas sin penalización.");
+        }
+    }
 }
 
 
