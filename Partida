@@ -1,1 +1,15 @@
+package reto;
+import java.util.*;
+public class partida {
+  private tablero tablero;
+  private ArrayList<jugador> jugadores;
+  private int turno;
+  private boolean finalizada;
+  private jugador ganador;
+  public partida(tablero tablero, ArrayList<jugador> jugadores) {
+      this.tablero = tablero;
+      this.jugadores = jugadores;
+      turno = 0;
+      finalizada = false;
+  }
 
