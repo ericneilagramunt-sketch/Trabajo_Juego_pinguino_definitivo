@@ -4,6 +4,6 @@ public abstract class Casilla {
 	   public Casilla(int posicion) {
 	       this.posicion = posicion;
 	   }
-	   public abstract void realizarAccion(jugador jugador);
+	   public abstract void realizarAccion(Jugador jugador);
 }
 
