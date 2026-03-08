@@ -12,4 +12,13 @@ public class partida {
       turno = 0;
       finalizada = false;
   }
+public jugador getJugadorActual() {
+      return jugadores.get(turno);
+  }
+  public void siguienteTurno() {
+      turno++;
+      if (turno >= jugadores.size())
+          turno = 0;
+  }
+
 
