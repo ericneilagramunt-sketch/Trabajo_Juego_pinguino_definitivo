@@ -1,39 +1,38 @@
 package reto;
-import java.util.*;
 import java.util.Random;
 import java.util.ArrayList;
+package reto;
+import java.util.ArrayList;
 public class Inventario {
-  private int peces;
-  private int bolas;
-  private ArrayList <Dado> dados;
-  public Inventario() {
-      peces = 0;
-      bolas = 0;
-      dados = new ArrayList<>();
-      dados.add(new Dado(1,6)); 
-  }
-  public int tirarDado() {
-      return dados.get(0).tirar();
-  }
-  public void agregarPez() {
-      if (peces < 2) peces++;
-  }
-  public boolean usarPez() {
-      if (peces > 0) {
-          peces--;
-          return true;
-      }
-      return false;
-  }
-  public void agregarBolas(int n) {
-      bolas += n;
-      if (bolas > 6) bolas = 6;
-  }
-  public void agregarDado(Dado d) {
-      if (dados.size() < 3)
-          dados.add(d);
-  }
-}
+    private int peces;
+    private int bolas;
+    private ArrayList<Dado> dados;
+
+
+    public Inventario() {
+        peces = 0;
+        bolas = 0;
+        dados = new ArrayList<>();
+        dados.add(new Dado(1, 6));
+    }
+
+
+    public int tirarDado() {
+        return dados.get(0).tirar();
+    }
+
+
+    public void agregarDado(Dado d) {
+        if (dados.size() < 3)
+            dados.add(d);
+        else
+            System.out.println("Ya tienes el máximo de 3 dados.");
+    }
+
+
+    public int cantidadDados() {
+        return dados.size();
+    }
 
 
 
