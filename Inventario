@@ -1,5 +1,6 @@
 package reto;
 import java.util.*;
+import java.util.Random;
 import java.util.ArrayList;
 public class Inventario {
   private int peces;
@@ -9,7 +10,7 @@ public class Inventario {
       peces = 0;
       bolas = 0;
       dados = new ArrayList<>();
-      dados.add(new dado(1,6)); 
+      dados.add(new Dado(1,6)); 
   }
   public int tirarDado() {
       return dados.get(0).tirar();
