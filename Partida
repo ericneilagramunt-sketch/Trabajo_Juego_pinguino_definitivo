@@ -6,14 +6,14 @@ public class Partida {
   private ArrayList <Jugador> jugadores;
   private int turno;
   private boolean finalizada;
-  private jugador ganador;
-  public Partida(tablero tablero, ArrayList<Jugador> jugadores) {
+  private Jugador ganador;
+  public Partida(Tablero tablero, ArrayList<Jugador> jugadores) {
       this.tablero = tablero;
       this.jugadores = jugadores;
       turno = 0;
       finalizada = false;
   }
-public jugador getJugadorActual() {
+public Jugador getJugadorActual() {
       return jugadores.get(turno);
   }
   public void siguienteTurno() {
@@ -21,11 +21,11 @@ public jugador getJugadorActual() {
       if (turno >= jugadores.size())
           turno = 0;
   }
- public tablero getTablero() { return tablero; }
+ public Tablero getTablero() { return tablero; }
   public boolean isFinalizada() { return finalizada; }
   public void setFinalizada(boolean f) { finalizada = f; }
-  public void setGanador(jugador j) { ganador = j; }
-  public jugador getGanador() { return ganador; }
+  public void setGanador(Jugador j) { ganador = j; }
+  public Jugador getGanador() { return ganador; }
 }
 
 
