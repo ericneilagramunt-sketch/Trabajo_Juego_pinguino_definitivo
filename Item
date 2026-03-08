@@ -1,10 +1,11 @@
 package reto;
 
-public abstract class Item {
+
+public abstract class item {
     protected String nombre;
     protected String descripcion;
 
-    public Item(String nombre, String descripcion) {
+    public item(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
@@ -17,7 +18,7 @@ public abstract class Item {
         return descripcion;
     }
 
-    public abstract void usar(Jugador jugador);
+    public abstract void usar(jugador jugador);
 
     @Override
     public String toString() {
