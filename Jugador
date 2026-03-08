@@ -1,41 +1,35 @@
 package reto;
-public abstract class Jugador {
+  public abstract class jugador {
+    protected String nombre;
+    protected String color;
+    protected int posicion;
+    protected inventario inventario;
+    protected boolean pierdeTurno;
 
-   protected String nombre;
-   protected String color;
-   protected int posicion;
-   protected Inventario inventario;
+    public jugador(String nombre, String color) {
+        this.nombre = nombre;
+        this.color = color;
+        this.posicion = 0;
+        this.inventario = new inventario();
+        this.pierdeTurno = false;
+    }
 
-public Jugador(String nombre, String color) {
-   this.nombre = nombre;
-   this.color = color;
-   this.posicion = 0;
-   this.inventario = new Inventario();
-   }
+    public void mover(int pasos) {
+        posicion += pasos;
+        if (posicion < 0) posicion = 0;
+    }
 
-public void mover(int pasos) {
-       posicion += pasos;
-       if (posicion < 0) posicion = 0;
-   }
+    public int tirarDado() {
+        return inventario.tirarDado();
+    }
 
- public int tirarDado() {
-    return inventario.tirarDado();
-   }
+    public String getNombre()       { return nombre; }
+    public String getColor()        { return color; }
+    public int    getPosicion()     { return posicion; }
+    public void   setPosicion(int p){ posicion = p; }
+    public inventario getInventario(){ return inventario; }
 
-public String getNombre() { 
-return nombre; 
+    public boolean isPierdeTurno()       { return pierdeTurno; }
+    public void    setPierdeTurno(boolean b){ pierdeTurno = b; }
 }
-
-   public int getPosicion() { 
-return posicion;
- }
-   
-public void setPosicion(int pos) { 
-posicion = pos; 
-}
-
-   public Inventario getInventario() {
- return inventario; }
-}
-
 
