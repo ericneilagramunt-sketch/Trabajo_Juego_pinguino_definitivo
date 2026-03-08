@@ -14,8 +14,8 @@ public class Gestor_partida {
 	       System.out.println("Nombre jugador 2:");
 	       String j2 = sc.nextLine();
 
-	       pinguino p1 = new pinguino(j1, "Azul");
-	       pinguino p2 = new pinguino(j2, "Rojo");
+	       pinguino p1 = new Pinguino(j1, "Azul");
+	       pinguino p2 = new Pinguino(j2, "Rojo");
 
 	       ArrayList <Jugador> jugadores = new ArrayList<>();
 	       jugadores.add(p1);
