@@ -2,9 +2,9 @@ package reto;
 import java.util.*;
 import java.util.Random;
 import java.util.ArrayList;
-public class tablero {
+public class Tablero {
   private ArrayList<Casilla> casillas;
-  public tablero(int size) {
+  public Tablero(int size) {
       casillas = new ArrayList<>();
       Random r = new Random();
       for (int i = 0; i < size; i++) {
