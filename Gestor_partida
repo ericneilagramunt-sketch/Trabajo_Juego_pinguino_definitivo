@@ -1,11 +1,11 @@
 package reto;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class gestorpartida {
+public class Gestorpartida {
 
-    private partida partida;
+    private Partida partida;
     private Scanner sc = new Scanner(System.in);
-    private foca focaCPU;
+    private Foca focaCPU;
 
     public void nuevaPartida() {
         System.out.println("BIENVENIDO AL JUEGO DEL PINGUINO");
@@ -23,11 +23,11 @@ public class gestorpartida {
             jugadores.add(new pinguino(nombre, colores[i - 1]));
         }
         focaCPU = new foca();
-        jugadores.add(focaCPU);
+        Jugadores.add(focaCPU);
         System.out.println("\n>> La Foca (CPU) se une como rival!");
 
-        tablero tablero = new tablero(50);
-        partida = new partida(tablero, jugadores);
+        Tablero tablero = new tablero(50);
+        Partida = new partida(Tablero, Jugadores);
 
         System.out.println("\n Partida creada con " + numJugadores + " jugadores + Foca CPU.");
         System.out.println("   El primero en llegar a la casilla 50 gana.\n");
