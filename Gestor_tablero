@@ -1,1 +1,9 @@
+package reto;
 
+public class GestorTablero {
+
+ public void ejecutarCasilla(partida partida, jugador jugador, casilla c) {
+        System.out.println("   [Casilla " + jugador.getPosicion()
+                + ": " + c.getClass().getSimpleName() + "]");
+        c.realizarAccion(jugador);
+    }
