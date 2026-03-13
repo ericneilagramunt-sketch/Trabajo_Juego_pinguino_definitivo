@@ -1,12 +1,6 @@
 package reto;
 public class Agujero extends casilla {
 
-/*
-Esta clase es CONTROLADORA
-Esto es debido a que la clase:
-Contiene lógica del juego.
-Decide qué ocurre cuando un jugador cae en un agujero.
-*/
     private tablero tablero;
 
     public Agujero(int pos) {
