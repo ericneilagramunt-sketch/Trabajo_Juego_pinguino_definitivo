@@ -213,8 +213,20 @@ int indiceDado = 0;
                 }
             }
         }
-
         deshabilitarBotones(true);
         gestorPartidas.ejecutarTurnoCompleto(actual, indiceDado);
         log(actual.getNombre() + " tira el dado → casilla " + actual.getPosicion()
                 + " (" + p.getTablero().getTipoCasilla(actual.getPosicion()) + ")");
+f (actual.isPendienteOso()) {
+            actual.setPendienteOso(false);
+            int r = JOptionPane.showConfirmDialog(frame,
+                    "Un oso te ataca! Tienes " + actual.getInventario().getCantidadPeces()
+                    + " pez/peces. Quieres sobornarle?",
+                    "Oso!", JOptionPane.YES_NO_OPTION);
+            if (r == JOptionPane.YES_OPTION && actual.getInventario().usarPez()) {
+                log("Has sobornado al oso con un pez.");
+            } else {
+                actual.setPosicion(0);
+                log("El oso te devuelve al inicio!");
+            }
+        }
