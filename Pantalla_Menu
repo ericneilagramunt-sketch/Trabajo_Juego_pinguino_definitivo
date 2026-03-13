@@ -3,3 +3,53 @@ package reto;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+public class PantallaMenu {
+
+    private gestorpartida gestorPartidas;
+    private JFrame        frame;
+
+    public PantallaMenu() {
+        this.gestorPartidas = new gestorpartida();
+    }
+
+
+
+    public void menu() {
+        frame = new JFrame("Pinguinos en el Hielo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(440, 360);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout(10, 10));
+        frame.getContentPane().setBackground(new Color(20, 80, 130));
+
+        JLabel titulo = new JLabel("PINGUINOS EN EL HIELO", SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 22));
+        titulo.setForeground(Color.WHITE);
+        titulo.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
+        frame.add(titulo, BorderLayout.NORTH);
+
+        JLabel subtitulo = new JLabel("El juego de mesa del frio!", SwingConstants.CENTER);
+        subtitulo.setFont(new Font("Arial", Font.ITALIC, 13));
+        subtitulo.setForeground(new Color(200, 230, 255));
+
+       
+        JPanel panelBotones = new JPanel(new GridLayout(4, 1, 0, 12));
+        panelBotones.setOpaque(false);
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 70, 30, 70));
+
+        JButton btnNueva  = crearBoton("Nueva Partida");
+        JButton btnCargar = crearBoton("Cargar Partida");
+        JButton btnSalir  = crearBoton("Salir");
+
+        btnNueva.addActionListener(e  -> botonNuevaPartida());
+        btnCargar.addActionListener(e -> pedirIdYCargar());
+        btnSalir.addActionListener(e  -> botonSalir());
+
+        panelBotones.add(subtitulo);
+        panelBotones.add(btnNueva);
+        panelBotones.add(btnCargar);
+        panelBotones.add(btnSalir);
+
+        frame.add(panelBotones, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
