@@ -15,14 +15,14 @@ public class PantallaMenu {
 
 
     public void menu() {
-        frame = new JFrame("Pinguinos en el Hielo");
+        frame = new JFrame("El Juego del pingu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(440, 360);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout(10, 10));
         frame.getContentPane().setBackground(new Color(20, 80, 130));
 
-        JLabel titulo = new JLabel("PINGUINOS EN EL HIELO", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("El juego del pingu", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 22));
         titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
