@@ -95,3 +95,7 @@ private void construirBarraBotones() {
             celda.setBackground(colorCasilla(c));
             celda.setBorder(BorderFactory.createLineBorder(new Color(150, 150, 150)));
             celda.setToolTipText(c.getClass().getSimpleName() + " [" + i + "]");
+ JLabel numLbl = new JLabel(String.valueOf(i), SwingConstants.CENTER);
+            numLbl.setFont(new Font("Arial", Font.PLAIN, 8));
+            numLbl.setForeground(Color.DARK_GRAY);
+            celda.add(numLbl, BorderLayout.SOUTH);
