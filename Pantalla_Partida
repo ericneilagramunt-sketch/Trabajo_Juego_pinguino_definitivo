@@ -137,4 +137,47 @@ private Color colorCasilla(casilla c) {
         if (c instanceof sueloquebradizo) return "S";
         return "·";
     }
+private void mostrarEstadoJugadores() {
+        panelJugadores.removeAll();
+        partida p      = gestorPartidas.getPartida();
+        jugador actual = p.getJugadorActual();
+
+        for (jugador j : p.getTodosLosJugadores()) {
+            boolean esTurno = (j == actual);
+            String html = "<html>"
+                    + (esTurno ? "<b>&#9654; " : "")
+                    + j.getNombre() + "</b> [" + j.getColor() + "]<br>"
+                    + "Casilla: " + j.getPosicion()
+                    + (j.isPierdeTurno() ? " (pierde turno)" : "")
+                    + (j instanceof foca && ((foca) j).estaBloqueada()
+                        ? " (bloq. " + ((foca) j).getTurnosBloqueada() + ")" : "")
+                    + "</html>";
+            JLabel lbl = new JLabel(html);
+            lbl.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
+            if (esTurno) lbl.setForeground(new Color(0, 120, 0));
+            panelJugadores.add(lbl);
+            panelJugadores.add(new JSeparator());
+        }
+        panelJugadores.revalidate();
+        panelJugadores.repaint();
+    }
+
+    private void mostrarInventario() {
+        panelInventario.removeAll();
+        jugador actual = gestorPartidas.getPartida().getJugadorActual();
+        if (actual == null) return;
+        inventario inv = actual.getInventario();
+
+        panelInventario.add(new JLabel("Peces:  " + inv.getCantidadPeces()
+                + " / " + inventario.MAX_PECES));
+        panelInventario.add(new JLabel("Bolas:  " + inv.getCantidadBolas()
+                + " / " + inventario.MAX_BOLAS));
+        panelInventario.add(new JLabel("Dados:  " + inv.cantidadDados()
+                + " / " + inventario.MAX_DADOS));
+        for (dado d : inv.getDados()) {
+            panelInventario.add(new JLabel("   -> " + d));
+        }
+        panelInventario.revalidate();
+        panelInventario.repaint();
+    }
 
