@@ -120,3 +120,21 @@ StringBuilder fichas = new StringBuilder();
         panelTablero.revalidate();
         panelTablero.repaint();
     }
+private Color colorCasilla(casilla c) {
+        if (c instanceof oso)            return new Color(255, 180, 80);   // naranja
+        if (c instanceof agujero)        return new Color(80,  80,  80);   // gris oscuro
+        if (c instanceof trineo)         return new Color(100, 200, 255);  // azul claro
+        if (c instanceof evento)         return new Color(255, 255, 100);  // amarillo
+        if (c instanceof sueloquebradizo)return new Color(180, 120, 60);   // marrón
+        return new Color(210, 240, 210);                                   // verde (normal)
+    }
+
+    private String simboloCasilla(casilla c) {
+        if (c instanceof oso)             return "O";
+        if (c instanceof agujero)         return "A";
+        if (c instanceof trineo)          return "T";
+        if (c instanceof evento)          return "?";
+        if (c instanceof sueloquebradizo) return "S";
+        return "·";
+    }
+
