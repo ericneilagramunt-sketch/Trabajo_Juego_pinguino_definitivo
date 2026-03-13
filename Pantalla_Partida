@@ -338,3 +338,52 @@ foca focaCPU = gestorPartidas.getFocaCPU();
             new PantallaMenu().menu();
         }
     }
+ private void gestionarFocaGUI(jugador actual, foca focaCPU) {
+        if (actual.getInventario().getCantidadPeces() > 0) {
+            int r = JOptionPane.showConfirmDialog(frame,
+                    "La Foca esta en tu casilla!\nTienes "
+                    + actual.getInventario().getCantidadPeces()
+                    + " pez/peces. La alimentas para bloquearla 2 turnos?",
+                    "Foca!", JOptionPane.YES_NO_OPTION);
+            if (r == JOptionPane.YES_OPTION) {
+                actual.getInventario().usarPez();
+                focaCPU.bloquear();
+                log(actual.getNombre() + " alimenta a la foca. Bloqueada 2 turnos.");
+            } else {
+                enviarAAgujero(actual, focaCPU);
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame,
+                    "La Foca esta en tu casilla y no tienes peces. Te golpea!");
+            enviarAAgujero(actual, focaCPU);
+        }
+    }
+
+    private void enviarAAgujero(jugador actual, foca focaCPU) {
+        int ag = gestorPartidas.getPartida().getTablero().buscarAgujeroAnterior(actual.getPosicion());
+        actual.setPosicion(ag);
+        log(actual.getNombre() + " golpeado por la foca → casilla " + ag);
+    }
+
+    private void log(String msg) {
+        areaLog.append(msg + "\n");
+        areaLog.setCaretPosition(areaLog.getDocument().getLength());
+    }
+
+    private void deshabilitarBotones(boolean deshabilitar) {
+        btnTirarDado.setEnabled(!deshabilitar);
+        btnUsarObjeto.setEnabled(!deshabilitar);
+        btnLanzarBola.setEnabled(!deshabilitar);
+    }
+
+    private JButton crearBoton(String texto) {
+        JButton btn = new JButton(texto);
+        btn.setFont(new Font("Arial", Font.BOLD, 13));
+        btn.setBackground(new Color(0, 120, 200));
+        btn.setForeground(Color.WHITE);
+        btn.setFocusPainted(false);
+        btn.setBorder(BorderFactory.createEmptyBorder(7, 16, 7, 16));
+        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        return btn;
+    }
+}
