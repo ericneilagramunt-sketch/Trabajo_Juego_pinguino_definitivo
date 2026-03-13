@@ -99,3 +99,6 @@ private void construirBarraBotones() {
             numLbl.setFont(new Font("Arial", Font.PLAIN, 8));
             numLbl.setForeground(Color.DARK_GRAY);
             celda.add(numLbl, BorderLayout.SOUTH);
+JLabel tipoLbl = new JLabel(simboloCasilla(c), SwingConstants.CENTER);
+            tipoLbl.setFont(new Font("Arial", Font.BOLD, 10));
+            celda.add(tipoLbl, BorderLayout.NORTH);
