@@ -320,3 +320,21 @@ foca focaCPU = gestorPartidas.getFocaCPU();
             JOptionPane.showMessageDialog(frame, "ID invalido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+ public void refrescarPartida() {
+        mostrarTablero();
+        mostrarEstadoJugadores();
+        mostrarInventario();
+    }
+
+    public void mostrarVictoria() {
+        deshabilitarBotones(true);
+        JOptionPane.showMessageDialog(frame,
+                "GANADOR: " + gestorPartidas.getPartida().getGanador().getNombre() + "!",
+                "Fin de partida", JOptionPane.INFORMATION_MESSAGE);
+        int op = JOptionPane.showConfirmDialog(frame,
+                "Volver al menu principal?", "Fin", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_OPTION) {
+            frame.dispose();
+            new PantallaMenu().menu();
+        }
+    }
