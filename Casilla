@@ -1,4 +1,8 @@
 package reto;
+/*Esta clase es controladora 
+debido a que define como se comportan las casillas durante el juego
+haciendo que las subclases implementen la acción concreta cuando un jugador cae en la casilla/*
+
 public abstract class Casilla {
 	 protected int posicion;
 	   public Casilla(int posicion) {
