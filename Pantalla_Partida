@@ -183,4 +183,19 @@ private void mostrarEstadoJugadores() {
  public void botonTirarDado() {
         partida p      = gestorPartidas.getPartida();
         jugador actual = p.getJugadorActual();
+if (actual instanceof foca) {
+            gestorPartidas.getFocaCPU().turnoIA(
+                    p.getJugadoresHumanos(), p.getTablero());
+            log("Turno de la FOCA (CPU) ejecutado automaticamente.");
+            gestorPartidas.siguienteTurno();
+            refrescarPartida();
+            return;
+        }
 
+        if (actual.isPierdeTurno()) {
+            actual.setPierdeTurno(false);
+            log(actual.getNombre() + " pierde su turno.");
+            gestorPartidas.siguienteTurno();
+            refrescarPartida();
+            return;
+        }
