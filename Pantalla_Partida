@@ -13,3 +13,18 @@ public class PantallaJuego {
     private JButton btnUsarObjeto;
     private JButton btnLanzarBola;
     private JButton btnGuardar;
+ public void iniciarPartida() {
+        frame = new JFrame("Pinguinos en el Hielo - Partida");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 700);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout(5, 5));
+
+        construirBarraBotones();
+        construirTablero();
+        construirPanelLateral();
+        construirLog();
+
+        frame.setVisible(true);
+        refrescarPartida();
+    }
