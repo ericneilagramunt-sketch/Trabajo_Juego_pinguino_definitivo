@@ -109,3 +109,14 @@ public void botonNuevaPartida() {
                 "Seguro que quieres salir?", "Salir", JOptionPane.YES_NO_OPTION);
         if (c == JOptionPane.YES_OPTION) System.exit(0);
     }
+private JButton crearBoton(String texto) {
+        JButton btn = new JButton(texto);
+        btn.setFont(new Font("Arial", Font.BOLD, 14));
+        btn.setBackground(new Color(0, 120, 200));
+        btn.setForeground(Color.WHITE);
+        btn.setFocusPainted(false);
+        btn.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        return btn;
+    }
+}
