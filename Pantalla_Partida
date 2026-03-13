@@ -1,1 +1,15 @@
-
+package reto;
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+public class PantallaJuego {
+    private gestorpartida gestorPartidas;
+    private JFrame        frame;
+    private JPanel    panelTablero;
+    private JPanel    panelJugadores;
+    private JPanel    panelInventario;
+    private JTextArea areaLog;
+    private JButton btnTirarDado;
+    private JButton btnUsarObjeto;
+    private JButton btnLanzarBola;
+    private JButton btnGuardar;
