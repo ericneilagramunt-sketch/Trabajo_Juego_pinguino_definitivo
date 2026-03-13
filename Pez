@@ -1,0 +1,14 @@
+package modulo;
+public class pez extends item {
+    public pez() {
+        super("Pez", 1);
+    }
+    @Override
+    public void usar(jugador jugador, gestorpartida gestor) {
+        gestor.menuUsarPez(jugador);
+    }
+    @Override
+    public String toString() {
+        return "Pez";
+    }
+}
