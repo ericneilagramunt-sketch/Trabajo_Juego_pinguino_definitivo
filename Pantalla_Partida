@@ -28,3 +28,59 @@ public class PantallaJuego {
         frame.setVisible(true);
         refrescarPartida();
     }
+private void construirBarraBotones() {
+        JPanel barra = new JPanel(new FlowLayout(FlowLayout.CENTER, 14, 7));
+        barra.setBackground(new Color(20, 80, 130));
+
+        btnTirarDado  = crearBoton("Tirar Dado");
+        btnUsarObjeto = crearBoton("Usar Objeto");
+        btnLanzarBola = crearBoton("Lanzar Bola de Nieve");
+        btnGuardar    = crearBoton("Guardar Partida");
+
+        btnTirarDado.addActionListener(e  -> botonTirarDado());
+        btnUsarObjeto.addActionListener(e -> botonUsarObjeto());
+        btnLanzarBola.addActionListener(e -> botonLanzarBola());
+        btnGuardar.addActionListener(e    -> guardarPartida());
+
+        barra.add(btnTirarDado);
+        barra.add(btnUsarObjeto);
+        barra.add(btnLanzarBola);
+        barra.add(btnGuardar);
+        frame.add(barra, BorderLayout.NORTH);
+    }
+
+    private void construirTablero() {
+        panelTablero = new JPanel(new GridLayout(5, 10, 2, 2));
+        panelTablero.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                "Tablero (50 casillas)"));
+        panelTablero.setPreferredSize(new Dimension(700, 380));
+        frame.add(panelTablero, BorderLayout.CENTER);
+    }
+
+    private void construirPanelLateral() {
+        JPanel lateral = new JPanel(new BorderLayout(0, 8));
+        lateral.setPreferredSize(new Dimension(240, 0));
+        lateral.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 8));
+
+        panelJugadores = new JPanel();
+        panelJugadores.setLayout(new BoxLayout(panelJugadores, BoxLayout.Y_AXIS));
+        panelJugadores.setBorder(BorderFactory.createTitledBorder("Jugadores"));
+
+        panelInventario = new JPanel();
+        panelInventario.setLayout(new BoxLayout(panelInventario, BoxLayout.Y_AXIS));
+        panelInventario.setBorder(BorderFactory.createTitledBorder("Inventario (turno actual)"));
+
+        lateral.add(new JScrollPane(panelJugadores), BorderLayout.CENTER);
+        lateral.add(panelInventario, BorderLayout.SOUTH);
+        frame.add(lateral, BorderLayout.EAST);
+    }
+
+    private void construirLog() {
+        areaLog = new JTextArea(5, 50);
+        areaLog.setEditable(false);
+        areaLog.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        JScrollPane scroll = new JScrollPane(areaLog);
+        scroll.setBorder(BorderFactory.createTitledBorder("Registro de eventos"));
+        frame.add(scroll, BorderLayout.SOUTH);
+    }
