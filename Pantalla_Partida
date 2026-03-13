@@ -199,3 +199,22 @@ if (actual instanceof foca) {
             refrescarPartida();
             return;
         }
+int indiceDado = 0;
+        ArrayList<dado> dados = actual.getInventario().getDados();
+        if (dados.size() > 1) {
+            String[] opts = new String[dados.size()];
+            for (int i = 0; i < dados.size(); i++) opts[i] = dados.get(i).toString();
+            String sel = (String) JOptionPane.showInputDialog(frame,
+                    "Elige dado:", "Dados disponibles",
+                    JOptionPane.QUESTION_MESSAGE, null, opts, opts[0]);
+            if (sel != null) {
+                for (int i = 0; i < opts.length; i++) {
+                    if (opts[i].equals(sel)) { indiceDado = i; break; }
+                }
+            }
+        }
+
+        deshabilitarBotones(true);
+        gestorPartidas.ejecutarTurnoCompleto(actual, indiceDado);
+        log(actual.getNombre() + " tira el dado → casilla " + actual.getPosicion()
+                + " (" + p.getTablero().getTipoCasilla(actual.getPosicion()) + ")");
