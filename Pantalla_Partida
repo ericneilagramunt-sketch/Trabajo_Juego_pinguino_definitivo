@@ -84,3 +84,14 @@ private void construirBarraBotones() {
         scroll.setBorder(BorderFactory.createTitledBorder("Registro de eventos"));
         frame.add(scroll, BorderLayout.SOUTH);
     }
+
+    private void mostrarTablero() {
+        panelTablero.removeAll();
+        partida p = gestorPartidas.getPartida();
+
+        for (int i = 0; i < 50; i++) {
+            casilla c   = p.getTablero().getCasilla(i);
+            JPanel celda = new JPanel(new BorderLayout());
+            celda.setBackground(colorCasilla(c));
+            celda.setBorder(BorderFactory.createLineBorder(new Color(150, 150, 150)));
+            celda.setToolTipText(c.getClass().getSimpleName() + " [" + i + "]");
