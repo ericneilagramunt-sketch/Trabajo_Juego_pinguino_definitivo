@@ -230,3 +230,49 @@ f (actual.isPendienteOso()) {
                 log("El oso te devuelve al inicio!");
             }
         }
+foca focaCPU = gestorPartidas.getFocaCPU();
+        if (focaCPU != null && focaCPU.getPosicion() == actual.getPosicion()
+                && actual instanceof pinguino) {
+            gestionarFocaGUI(actual, focaCPU);
+        }
+
+        gestorPartidas.siguienteTurno();
+        refrescarPartida();
+        deshabilitarBotones(false);
+
+        if (gestorPartidas.getPartida().isFinalizada()) mostrarVictoria();
+    }
+
+    public void botonUsarObjeto() {
+        jugador actual = gestorPartidas.getPartida().getJugadorActual();
+        ArrayList<item> items = actual.getInventario().getLista();
+        if (items.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "No tienes objetos en el inventario.");
+            return;
+        }
+        String[] opts = items.stream().map(Object::toString).toArray(String[]::new);
+        String sel = (String) JOptionPane.showInputDialog(frame,
+                "Elige objeto:", "Inventario",
+                JOptionPane.QUESTION_MESSAGE, null, opts, opts[0]);
+        if (sel == null) return;
+        for (item it : items) {
+            if (it.toString().equals(sel)) {
+                it.usar(actual, gestorPartidas);
+                log(actual.getNombre() + " usa: " + it.getNombre());
+                refrescarPartida();
+                return;
+            }
+        }
+    }
+
+    public void botonFinalizarTurno() {
+        gestorPartidas.siguienteTurno();
+        refrescarPartida();
+    }
+
+    public void botonLanzarBola() {
+        jugador actual = gestorPartidas.getPartida().getJugadorActual();
+        if (actual.getInventario().getCantidadBolas() == 0) {
+            JOptionPane.showMessageDialog(frame, "No tienes bolas de nieve.");
+            return;
+        }
