@@ -276,3 +276,30 @@ foca focaCPU = gestorPartidas.getFocaCPU();
             JOptionPane.showMessageDialog(frame, "No tienes bolas de nieve.");
             return;
         }
+ ArrayList<jugador> objetivos = new ArrayList<>();
+        for (jugador j : gestorPartidas.getPartida().getTodosLosJugadores()) {
+            if (j != actual) objetivos.add(j);
+        }
+        if (objetivos.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "No hay jugadores a los que lanzar.");
+            return;
+        }
+        String[] opts = objetivos.stream()
+                .map(j -> j.getNombre() + " (casilla " + j.getPosicion() + ")")
+                .toArray(String[]::new);
+        String sel = (String) JOptionPane.showInputDialog(frame,
+                "A quien lanzas la bola?", "Lanzar bola de nieve",
+                JOptionPane.QUESTION_MESSAGE, null, opts, opts[0]);
+        if (sel == null) return;
+        for (int i = 0; i < opts.length; i++) {
+            if (opts[i].equals(sel)) {
+                jugador objetivo = objetivos.get(i);
+                actual.getInventario().usarBola();
+                objetivo.mover(-2);
+                log(actual.getNombre() + " lanza una bola a " + objetivo.getNombre()
+                        + " → casilla " + objetivo.getPosicion());
+                refrescarPartida();
+                return;
+            }
+        }
+    }
