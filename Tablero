@@ -1,31 +1,35 @@
-package reto;
-import java.util.*;
-import java.util.Random;
+package modelo;
 import java.util.ArrayList;
+import java.util.Random;
 public class tablero {
+
     private ArrayList<casilla> casillas;
 
     public tablero(int size) {
         casillas = new ArrayList<>();
         Random r = new Random();
-        for (int i = 0; i < size; i++) {
-            int tipo = r.nextInt(5);
+
+        casillas.add(new normal(0));
+
+        for (int i = 1; i < size - 1; i++) {
+            int tipo = r.nextInt(6);
             switch (tipo) {
-                case 0:  casillas.add(new Oso(i));               break;
-                case 1:  casillas.add(new Agujero(i));           break;
-                case 2:  casillas.add(new Trineo(i));            break;
-                case 3:  casillas.add(new Evento(i));            break;
-                default: casillas.add(new Suelo_quebradizo(i));  break;
+                case 0:  casillas.add(new oso(i));               break;
+                case 1:  casillas.add(new agujero(i));           break;
+                case 2:  casillas.add(new trineo(i));            break;
+                case 3:  casillas.add(new evento(i));            break;
+                case 4:  casillas.add(new sueloquebradizo(i));   break;
+                default: casillas.add(new normal(i));            break;
             }
         }
 
+        casillas.add(new normal(size - 1));
         for (casilla c : casillas) {
-            if (c instanceof trineo)  ((trineo)  c).setTablero(this);
-            if (c instanceof agujero) ((agujero) c).setTablero(this);
-            if (c instanceof evento)  ((evento)  c).setTablero(this);
+            if (c instanceof trineo)       ((trineo)       c).setTablero(this);
+            if (c instanceof agujero)      ((agujero)      c).setTablero(this);
+            if (c instanceof evento)       ((evento)       c).setTablero(this);
         }
     }
-
     public void activarCasilla(jugador j) {
         int pos = j.getPosicion();
         if (pos >= 0 && pos < casillas.size()) {
@@ -33,20 +37,24 @@ public class tablero {
         }
     }
 
+
     public int getSize() { return casillas.size(); }
+
+    public casilla getCasilla(int pos) {
+        if (pos >= 0 && pos < casillas.size()) return casillas.get(pos);
+        return null;
+    }
 
     public String getTipoCasilla(int pos) {
         if (pos < 0 || pos >= casillas.size()) return "fuera";
         return casillas.get(pos).getClass().getSimpleName();
     }
-
     public int buscarProximoTrineo(int posActual) {
         for (int i = posActual + 1; i < casillas.size(); i++) {
             if (casillas.get(i) instanceof trineo) return i;
         }
         return -1;
     }
-
     public int buscarAgujeroAnterior(int posActual) {
         for (int i = posActual - 1; i >= 0; i--) {
             if (casillas.get(i) instanceof agujero) return i;
@@ -55,30 +63,24 @@ public class tablero {
     }
 
     public ArrayList<Integer> posicionesIntermedias(int desde, int hasta) {
-        ArrayList<Integer> posiciones = new ArrayList<>();
-        int inicio = Math.min(desde, hasta);
-        int fin    = Math.max(desde, hasta);
-        for (int i = inicio + 1; i <= fin; i++) posiciones.add(i);
-        return posiciones;
+        ArrayList<Integer> pos = new ArrayList<>();
+        int ini = Math.min(desde, hasta);
+        int fin = Math.max(desde, hasta);
+        for (int i = ini + 1; i <= fin; i++) pos.add(i);
+        return pos;
     }
 
     public void mostrarTablero(ArrayList<jugador> jugadores) {
         System.out.println("\n=== TABLERO (50 casillas) ===");
-        System.out.println("O=Oso  A=Agujero  T=Trineo  E=Evento  S=SueloQ");
-        System.out.println();
-
+        System.out.println("N=Normal  O=Oso  A=Agujero  T=Trineo  E=Evento  S=Suelo");
         for (int i = 0; i < casillas.size(); i++) {
-            String tipo = casillas.get(i).getClass().getSimpleName();
-            char simbolo = obtenerSimbolo(tipo);
-
-            StringBuilder jugadoresAqui = new StringBuilder();
+            char simbolo = obtenerSimbolo(casillas.get(i).getClass().getSimpleName());
+            StringBuilder fichas = new StringBuilder();
             for (jugador j : jugadores) {
-                if (j.getPosicion() == i) {
-                    jugadoresAqui.append("[").append(j.getNombre().charAt(0)).append("]");
-                }
+                if (j.getPosicion() == i)
+                    fichas.append("[").append(j.getNombre().charAt(0)).append("]");
             }
-
-            System.out.printf("%2d:%c%s ", i, simbolo, jugadoresAqui.toString());
+            System.out.printf("%2d:%c%s ", i, simbolo, fichas.toString());
             if ((i + 1) % 10 == 0) System.out.println();
         }
         System.out.println("\n============================");
@@ -86,12 +88,12 @@ public class tablero {
 
     private char obtenerSimbolo(String tipo) {
         switch (tipo) {
-            case "oso":              return 'O';
-            case "agujero":         return 'A';
-            case "trineo":           return 'T';
-            case "evento":           return 'E';
-            case "suelo_quebradizo": return 'S';
-            default:                 return '?';
+            case "oso":            return 'O';
+            case "agujero":        return 'A';
+            case "trineo":         return 'T';
+            case "evento":         return 'E';
+            case "sueloquebradizo":return 'S';
+            default:               return 'N';
         }
     }
 }
