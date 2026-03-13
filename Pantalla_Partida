@@ -180,4 +180,7 @@ private void mostrarEstadoJugadores() {
         panelInventario.revalidate();
         panelInventario.repaint();
     }
+ public void botonTirarDado() {
+        partida p      = gestorPartidas.getPartida();
+        jugador actual = p.getJugadorActual();
 
