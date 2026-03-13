@@ -102,3 +102,21 @@ private void construirBarraBotones() {
 JLabel tipoLbl = new JLabel(simboloCasilla(c), SwingConstants.CENTER);
             tipoLbl.setFont(new Font("Arial", Font.BOLD, 10));
             celda.add(tipoLbl, BorderLayout.NORTH);
+StringBuilder fichas = new StringBuilder();
+            for (jugador j : p.getTodosLosJugadores()) {
+                if (j.getPosicion() == i) {
+                    fichas.append(j.getNombre().substring(0, 1));
+                }
+            }
+            if (fichas.length() > 0) {
+                JLabel fichaLbl = new JLabel(fichas.toString(), SwingConstants.CENTER);
+                fichaLbl.setFont(new Font("Arial", Font.BOLD, 12));
+                fichaLbl.setForeground(Color.BLACK);
+                celda.add(fichaLbl, BorderLayout.CENTER);
+            }
+
+            panelTablero.add(celda);
+        }
+        panelTablero.revalidate();
+        panelTablero.repaint();
+    }
