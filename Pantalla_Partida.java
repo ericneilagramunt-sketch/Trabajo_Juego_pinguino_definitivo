@@ -2,7 +2,8 @@ package reto;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-public class PantallaJuego {
+//Esta clase es vista
+public class Pantalla_Partida {
     private Gestor_partida gestorPartidas;
     private JFrame        frame;
     private JPanel    panelTablero;
