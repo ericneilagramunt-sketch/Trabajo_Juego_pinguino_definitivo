@@ -3,13 +3,13 @@ package reto;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-public class PantallaMenu {
+public class Pantalla_Menu {
 
-    private gestorpartida gestorPartidas;
+    private Gestor_partida gestorPartidas;
     private JFrame        frame;
 
-    public PantallaMenu() {
-        this.gestorPartidas = new gestorpartida();
+    public Pantalla_Menu() {
+        this.gestorPartidas = new Gestor_partida();
     }
 
 
