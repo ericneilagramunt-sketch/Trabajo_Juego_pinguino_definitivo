@@ -1,12 +1,11 @@
 package reto;
-
 import java.util.ArrayList;
 
-public class foca extends jugador {
+public class Foca extends Jugador {
 
     private int turnosBloqueada;
 
-    public foca() {
+    public Foca() {
         super("Foca (CPU)", "Gris");
         this.turnosBloqueada = 0;
     }
@@ -46,7 +45,7 @@ public class foca extends jugador {
         System.out.println(">> La foca avanza de casilla " + posAnterior + " a casilla " + posicion);
 
         ArrayList<Integer> intermedias = tablero.posicionesIntermedias(posAnterior, posicion - 1);
-        for (jugador j : jugadoresHumanos) {
+        for (Jugador j : jugadoresHumanos) {
             if (intermedias.contains(j.getPosicion())) {
                 System.out.println(">> La foca pasa por la casilla de " + j.getNombre() + "!");
                 System.out.println("   Le quita la mitad del inventario.");
@@ -54,7 +53,7 @@ public class foca extends jugador {
                 mostrarInventarioReducido(j);
             }
         }
-        for (jugador j : jugadoresHumanos) {
+        for (Jugador j : jugadoresHumanos) {
             if (j.getPosicion() == posicion) {
                 System.out.println(">> La foca COINCIDE con " + j.getNombre() + " en casilla " + posicion + "!");
                 System.out.println("   Le golpea con la cola y lo envia al agujero anterior.");
@@ -70,7 +69,7 @@ public class foca extends jugador {
         System.out.println("-----------------------------------");
     }
 
-    private void mostrarInventarioReducido(jugador j) {
+    private void mostrarInventarioReducido(Jugador j) {
         System.out.println("   Inventario de " + j.getNombre() + " tras el ataque:");
         j.getInventario().mostrar();
     }
