@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
-
+// Esta clase es controladora
 public class Gestor_BBDD {
 
     public static Connection openConnection(Scanner scanner) {
