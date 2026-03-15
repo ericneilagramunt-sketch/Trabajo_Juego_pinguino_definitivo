@@ -1,5 +1,5 @@
 package reto;
-
+//Esta clase es controladora
 public class GestorTablero {
 
  public void ejecutarCasilla(partida partida, jugador jugador, casilla c) {
