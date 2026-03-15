@@ -1,5 +1,5 @@
 package reto;
-
+//Esta clase es vista
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
