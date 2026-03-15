@@ -1,5 +1,5 @@
 package reto;
-
+//esta clase es controladora
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
