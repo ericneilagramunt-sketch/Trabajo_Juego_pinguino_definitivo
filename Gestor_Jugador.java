@@ -1,5 +1,5 @@
 package reto;
-
+//ESTA CLASE ES CONTROLADOR
 public class Gestor_jugador {
 
 	    // Jugador actual (para control de turnos)
