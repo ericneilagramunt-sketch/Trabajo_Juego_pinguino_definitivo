@@ -18,7 +18,7 @@ switch (evento) {
                System.out.println("Has conseguido un pez!");
                break;
            case 1:
-               jugador.getInventario().agregarbolaNieve(r.nextInt(3) + 1);
+               jugador.getInventario().agregarBolas(r.nextInt(3) + 1);
                System.out.println("Has conseguido bolas de nieve!");
                break;
            case 2:
