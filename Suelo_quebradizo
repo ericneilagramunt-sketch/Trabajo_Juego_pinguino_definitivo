@@ -1,5 +1,5 @@
 package reto;
-public class Suelo_quebradizo extends casilla {
+public class Suelo_quebradizo extends Casilla {
 
     public Suelo_quebradizo(int pos) {
         super(pos);
