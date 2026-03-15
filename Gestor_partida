@@ -14,20 +14,20 @@ public class Gestorpartida {
         System.out.println("\nCuantos jugadores humanos? (2-4):");
         int numJugadores = leerEnteroEntre(2, 4);
 
-        ArrayList<jugador> jugadores = new ArrayList<>();
+        ArrayList <Jugador> jugadores = new ArrayList<>();
         String[] colores = {"Azul", "Rojo", "Verde", "Amarillo"};
 
         for (int i = 1; i <= numJugadores; i++) {
             System.out.println("Nombre jugador " + i + ":");
             String nombre = sc.nextLine().trim();
-            jugadores.add(new pinguino(nombre, colores[i - 1]));
+            jugadores.add(new Pinguino(nombre, colores[i - 1]));
         }
-        focaCPU = new foca();
+        focaCPU = new Foca();
         Jugadores.add(focaCPU);
         System.out.println("\n>> La Foca (CPU) se une como rival!");
 
-        Tablero tablero = new tablero(50);
-        Partida = new partida(Tablero, Jugadores);
+        Tablero tablero = new Tablero(50);
+        Partida = new Partida(Tablero, Jugadores);
 
         System.out.println("\n Partida creada con " + numJugadores + " jugadores + Foca CPU.");
         System.out.println("   El primero en llegar a la casilla 50 gana.\n");
@@ -36,8 +36,8 @@ public class Gestorpartida {
     public void jugar() {
         while (!partida.isFinalizada()) {
 
-            jugador actual = partida.getJugadorActual();
-            if (actual instanceof foca) {
+            Jugador actual = partida.getJugadorActual();
+            if (actual instanceof Foca) {
                 focaCPU.turnoIA(partida.getJugadoresHumanos(), partida.getTablero());
                 comprobarVictoria(focaCPU);
                 partida.siguienteTurno();
@@ -101,7 +101,7 @@ public class Gestorpartida {
         System.out.println("  GANADOR: " + partida.getGanador().getNombre());
     }
 
-    private boolean realizarTirada(jugador actual) {
+    private boolean realizarTirada(Jugador actual) {
         int tirada = actual.tirarDado();
         System.out.println("\n DADO " + actual.getNombre() + " tira el dado... ¡" + tirada + "!");
         actual.mover(tirada);
@@ -117,8 +117,8 @@ public class Gestorpartida {
         return true;
     }
 
-    private void menuUsarItem(jugador actual) {
-        inventario inv = actual.getInventario();
+    private void menuUsarItem(Jugador actual) {
+        Inventario inv = actual.getInventario();
         ArrayList<String> opciones = new ArrayList<>();
 
         if (inv.getCantidadPeces() > 0)
@@ -169,7 +169,7 @@ public class Gestorpartida {
         }
     }
 
-    private void menuUsarPez(jugador actual) {
+    private void menuUsarPez(Jugador actual) {
         System.out.println("\n ¿Para que quieres usar el pez?");
         System.out.println("  1) Reservar para sobornar al oso (automatico cuando caigas en oso)");
         System.out.println("  2) Alimentar a la foca para bloquearla 2 turnos");
@@ -189,11 +189,11 @@ public class Gestorpartida {
         }
     }
 
-    private void menuUsarBola(jugador actual) {
-        ArrayList<jugador> humanos   = partida.getJugadoresHumanos();
-        ArrayList<jugador> objetivos = new ArrayList<>();
+    private void menuUsarBola(Jugador actual) {
+        ArrayList<Jugador> humanos   = partida.getJugadoresHumanos();
+        ArrayList<Jugador> objetivos = new ArrayList<>();
 
-        for (jugador j : humanos) {
+        for (Jugador j : humanos) {
             if (!j.equals(actual)) objetivos.add(j);
         }
         objetivos.add(focaCPU); 
@@ -205,7 +205,7 @@ public class Gestorpartida {
 
         System.out.println("\n  ¿A quien lanzas la bola de nieve?");
         for (int i = 0; i < objetivos.size(); i++) {
-            jugador obj = objetivos.get(i);
+            Jugador obj = objetivos.get(i);
             System.out.println("  " + (i + 1) + ") " + obj.getNombre()
                     + " (casilla " + obj.getPosicion() + ")");
         }
@@ -218,7 +218,7 @@ public class Gestorpartida {
             return;
         }
 
-        jugador objetivo = objetivos.get(op - 1);
+        Jugador objetivo = objetivos.get(op - 1);
         if (actual.getInventario().usarBola()) {
             objetivo.mover(-2);
             if (objetivo.getPosicion() < 0) objetivo.setPosicion(0);
@@ -230,14 +230,14 @@ public class Gestorpartida {
         }
     }
 
-    private void menuVerDados(jugador actual) {
+    private void menuVerDados(Jugador actual) {
         int total = actual.getInventario().cantidadDados();
         System.out.println("   Tienes " + total + " dado(s). Al tirar se usara el dado con mayor rango disponible.");
         System.out.println("   (El sistema elige automaticamente el dado al tirar)");
     }
 
-    private void comprobarGuerra(jugador actual) {
-        for (jugador otro : partida.getJugadoresHumanos()) {
+    private void comprobarGuerra(Jugador actual) {
+        for (Jugador otro : partida.getJugadoresHumanos()) {
             if (otro.equals(actual)) continue;
             if (otro.getPosicion() != actual.getPosicion()) continue;
 
@@ -273,7 +273,7 @@ public class Gestorpartida {
         }
     }
 
-    private void comprobarInteraccionFoca(jugador actual) {
+    private void comprobarInteraccionFoca(Jugador actual) {
         if (focaCPU.getPosicion() != actual.getPosicion()) return;
 
         System.out.println("\n🦭 ¡La FOCA esta en tu misma casilla!");
@@ -296,14 +296,14 @@ public class Gestorpartida {
         }
     }
 
-    private void ataqueDelaFoca(jugador actual) {
+    private void ataqueDelaFoca(Jugador actual) {
         System.out.println("   🦭 ¡La foca te golpea con la cola! Te envia al agujero anterior.");
         int agujero = partida.getTablero().buscarAgujeroAnterior(actual.getPosicion());
         actual.setPosicion(agujero);
         System.out.println("   Ahora estas en la casilla: " + agujero);
     }
 
-    private void comprobarVictoria(jugador j) {
+    private void comprobarVictoria(Jugador j) {
         if (j.getPosicion() >= partida.getTablero().getSize()) {
             j.setPosicion(partida.getTablero().getSize() - 1); 
             partida.setGanador(j);
