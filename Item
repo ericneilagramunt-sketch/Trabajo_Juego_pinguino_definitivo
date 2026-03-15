@@ -1,7 +1,7 @@
 package reto;
 
 
-public abstract class item {
+public abstract class Item {
     protected String nombre;
     protected String descripcion;
 
@@ -18,7 +18,7 @@ public abstract class item {
         return descripcion;
     }
 
-    public abstract void usar(jugador jugador);
+    public abstract void usar(Jugador jugador);
 
     @Override
     public String toString() {
