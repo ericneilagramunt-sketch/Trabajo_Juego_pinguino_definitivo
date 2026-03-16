@@ -1,13 +1,13 @@
 package reto;
 
-public class pez extends item {
+public class Pez extends item {
 
-    public pez() {
+    public Pez() {
         super("Pez", 1);
     }
 
     @Override
-    public void usar(jugador jugador, gestorpartida gestor) {
+    public void usar(Jugador jugador, Gestor_partida gestor) {
         gestor.menuUsarPez(jugador);
     }
 

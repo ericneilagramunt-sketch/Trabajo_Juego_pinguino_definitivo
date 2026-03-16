@@ -1,12 +1,12 @@
 package reto;
-public class suelo_quebradizo extends casilla {
+public class Suelo_quebradizo extends Casilla {
 
-    public suelo_quebradizo(int pos) {
+    public Suelo_quebradizo(int pos) {
         super(pos);
     }
 
     @Override
-    public void realizarAccion(jugador jugador) {
+    public void realizarAccion(Jugador jugador) {
         int total = jugador.getInventario().totalObjetos();
         System.out.println("¡Pisas suelo quebradizo! (Tienes " + total + " objeto(s) en inventario)");
 

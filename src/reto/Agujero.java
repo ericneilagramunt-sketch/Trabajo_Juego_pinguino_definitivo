@@ -1,5 +1,5 @@
 package reto;
-public class Agujero extends casilla {
+public class Agujero extends Casilla {
 
     private tablero tablero;
 
