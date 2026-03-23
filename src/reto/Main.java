@@ -12,7 +12,7 @@ public class main {
     }
 
     public static void jugarPorConsola() {
-        gestorpartida gestor = new gestorpartida();
+        Gestor_partida gestor = new Gestor_partida();
         gestor.nuevaPartida();
         gestor.jugar();
     }
