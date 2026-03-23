@@ -1,14 +1,14 @@
 package reto;
-public class trineo extends casilla {
+public class Trineo extends Casilla {
 
-    private tablero tablero;
+    private Tablero Tablero;
 
-    public trineo(int pos) {
+    public Trineo(int pos) {
         super(pos);
         this.tablero = null;
     }
 
-    public trineo(int pos, tablero tablero) {
+    public Trineo(int pos, tablero tablero) {
         super(pos);
         this.tablero = tablero;
     }
