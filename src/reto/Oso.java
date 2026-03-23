@@ -1,3 +1,5 @@
+package reto;
+
 public class Oso extends Casilla {
 
     public Oso(int posicion) {
