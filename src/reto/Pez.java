@@ -1,6 +1,6 @@
 package reto;
 
-public class Pez extends item {
+public class Pez extends Item {
 
     public Pez() {
         super("Pez", 1);
