@@ -1,6 +1,6 @@
 package reto;
-public class pinguino extends jugador {
-    public pinguino(String nombre, String color) {
+public class Pinguino extends Jugador {
+    public Pinguino(String nombre, String color) {
         super(nombre, color);
     }
     public void getPersonaSatelite(pinguino p) {
