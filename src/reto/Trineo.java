@@ -16,7 +16,7 @@ public class Trineo extends Casilla {
     public void setTablero(tablero t) { this.tablero = t; }
 
     @Override
-    public void realizarAccion(jugador jugador) {
+    public void realizarAccion(Jugador Jugador) {
         System.out.println("   Trineo! Avanzas al siguiente trineo.");
         if (tablero != null) {
             int siguiente = tablero.buscarProximoTrineo(jugador.getPosicion());
