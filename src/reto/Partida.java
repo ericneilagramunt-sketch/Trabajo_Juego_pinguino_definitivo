@@ -1,12 +1,12 @@
 package reto;
 import java.util.ArrayList;
 public class partida {
-    private tablero             tablero;
+    private Tablero             tablero;
     private ArrayList<jugador>  jugadores;
     private int                 turnos;
     private int                 jugadorActual; 
     private boolean             finalizada;
-    private jugador             ganador;
+    private Jugador             ganador;
 
     public partida(tablero tablero, ArrayList<jugador> jugadores) {
         this.tablero        = tablero;
@@ -17,7 +17,7 @@ public class partida {
         this.ganador        = null;
     }
 
-    public jugador getJugadorActual() {
+    public Jugador getJugadorActual() {
         return jugadores.get(jugadorActual);
     }
 
@@ -27,7 +27,7 @@ public class partida {
         if (jugadorActual >= jugadores.size()) jugadorActual = 0;
     }
 
-    public tablero getTablero()               
+    public Tablero getTablero()               
     { return tablero; }
     public void  setTablero(tablero t)     
      { this.tablero = t; }
@@ -58,18 +58,17 @@ public class partida {
     { this.ganador = j; }
 
 
-    public ArrayList<jugador> getJugadoresHumanos() {
-        ArrayList<jugador> humanos = new ArrayList<>();
-        for (jugador j : jugadores) {
+    public ArrayList<Jugador> getJugadoresHumanos() {
+        ArrayList<Jugador> humanos = new ArrayList<>();
+        for (Jugador j : jugadores) {
             if (!(j instanceof foca)) humanos.add(j);
         }
         return humanos;
     }
 
-    public ArrayList<jugador> getTodosLosJugadores() {
+    public ArrayList<Jugador> getTodosLosJugadores() {
         return jugadores;
     }
 }
 
-    }
-}
+    
