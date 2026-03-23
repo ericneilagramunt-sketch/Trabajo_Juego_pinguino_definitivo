@@ -1,3 +1,5 @@
+package reto;
+
 public class BolaDeNieve extends Item {
 
     public BolaDeNieve(String nombre, int cantidad) {
