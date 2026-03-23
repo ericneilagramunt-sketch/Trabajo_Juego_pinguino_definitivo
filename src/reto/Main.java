@@ -1,9 +1,9 @@
 package reto;
 import javax.swing.SwingUtilities;
 
-public class main {
+public class Main {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         if (args.length > 0 && args[0].equalsIgnoreCase("consola")) {
             jugarPorConsola();
         } else {
