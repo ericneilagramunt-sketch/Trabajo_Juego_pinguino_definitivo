@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class tablero {
+public class Tablero {
 
-    private ArrayList<casilla> casillas;
+    private ArrayList<Casilla> casillas;
 
-    public tablero(int size) {
+    public Tablero(int size) {
         casillas = new ArrayList<>();
         Random r = new Random();
 
