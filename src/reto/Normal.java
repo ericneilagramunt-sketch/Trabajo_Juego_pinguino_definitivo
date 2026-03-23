@@ -1,6 +1,6 @@
 package reto;
-public class Normal extends casilla {
-    public normal(int pos) {
+public class Normal extends Casilla {
+    public Normal(int pos) {
         super(pos);
     }
 
