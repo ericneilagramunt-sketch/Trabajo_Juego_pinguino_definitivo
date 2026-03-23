@@ -27,7 +27,7 @@ public class Foca extends Jugador {
     public int getTurnosBloqueada() { return turnosBloqueada; }
 
   
-    public void turnoIA(ArrayList<jugador> jugadoresHumanos, tablero tablero) {
+    public void turnoIA(ArrayList<Jugador> jugadoresHumanos, Tablero Tablero) {
         System.out.println("\n-----------------------------------");
         System.out.println(">> Turno de la FOCA (CPU)");
 
