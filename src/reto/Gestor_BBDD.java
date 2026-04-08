@@ -5,134 +5,152 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 // Esta clase es controladora
 public class Gestor_BBDD {
+	public static Connection conectarBaseDatos(Scanner scan) {
+		System.out.println("Intentando conectarse a la base de datos...");
 
-    public static Connection openConnection(Scanner scanner) {
-        System.out.println("Connecting to database...");
+		// 1) Elegir entorno
+		String entorno = "";
+		boolean valido = false;
+		while (!valido) {
+			System.out.println("Selecciona centro o fuera de centro (CENTRO/FUERA):");
+			entorno = scan.nextLine().trim().toLowerCase();
 
-        String env = "";
-        while (true) {
-            System.out.println("Are you at school or outside? (SCHOOL/HOME):");
-            env = scanner.nextLine().trim();
-            if (env.equalsIgnoreCase("school") || env.equalsIgnoreCase("home")) break;
-            System.out.println("Invalid input. Type SCHOOL or HOME.");
-        }
+			if (entorno.equalsIgnoreCase("centro") || entorno.equalsIgnoreCase("fuera")) {
+				valido = true;
+			} else {
+				System.out.println("Entrada no válida. Escribe CENTRO o FUERA.");
+			}
+		}
 
-        String dbUrl = env.equalsIgnoreCase("school")
-                ? "jdbc:oracle:thin:@//192.168.3.26:1521/XEPDB2"
-                : "jdbc:oracle:thin:@//oracle.ilerna.com:1521/XEPDB2";
+		String url = entorno.equals("centro") 
+				? "jdbc:oracle:thin:@//192.168.3.26:1521/XEPDB2"
+				: "jdbc:oracle:thin:@//oracle.ilerna.com:1521/XEPDB2";
 
-        System.out.println("Username:");
-        String username = scanner.nextLine().trim();
+		// 🔐 CREDENCIALES FIJAS (las que me has dado)
+		String user = "DM1_2526_GRUP07";
+		String pwd = "AGRUP07";
 
-        System.out.println("Password:");
-        String password = scanner.nextLine();
+		System.out.println("Conectando automáticamente con el usuario: " + user);
 
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conn = DriverManager.getConnection(dbUrl, username, password);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-            if (conn.isValid(5)) {
-                System.out.println("Connected (" + env.toUpperCase() + ").");
-            } else {
-                System.out.println("Connection created but may not be valid.");
-            }
+			Connection con = DriverManager.getConnection(url, user, pwd);
 
-            return conn;
+			if (con.isValid(5)) {
+				System.out.println("Conectados a la base de datos (" + entorno.toUpperCase() + ").");
+			} else {
+				System.out.println("Conexión creada, pero no parece válida.");
+			}
 
-        } catch (ClassNotFoundException e) {
-            System.out.println("Oracle driver not found.");
-        } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
-        }
+			return con;
 
-        return null;
-    }
+		} catch (ClassNotFoundException e) {
+			System.out.println("No se ha encontrado el driver de Oracle. Añade ojdbc.");
+		} catch (SQLException e) {
+			System.out.println("No se pudo conectar.");
+			System.out.println("Detalle: " + e.getMessage());
+		}
 
-    public static void closeConnection(Connection conn) {
-        if (conn != null) {
-            try { conn.close(); } catch (SQLException ignored) {}
-        }
-    }
+		return null;
+	}
 
-    public static int insertRow(Connection conn, String query) {
-        return runWriteQuery(conn, query, "INSERT");
-    }
+	public static void cerrar(Connection con) {
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException ignored) {
+			}
+		}
+	}
 
-    public static int updateRow(Connection conn, String query) {
-        return runWriteQuery(conn, query, "UPDATE");
-    }
+	public static int insert(Connection con, String sql) {
+		return executeInsUpDel(con, sql, "Insert");
+	}
 
-    public static int deleteRow(Connection conn, String query) {
-        return runWriteQuery(conn, query, "DELETE");
-    }
+	public static int update(Connection con, String sql) {
+		return executeInsUpDel(con, sql, "Update");
+	}
 
-    public static ArrayList<LinkedHashMap<String, String>> fetchRows(Connection conn, String query) {
-        ArrayList<LinkedHashMap<String, String>> rows = new ArrayList<>();
+	public static int delete(Connection con, String sql) {
+		return executeInsUpDel(con, sql, "Delete");
+	}
 
-        if (conn == null) {
-            System.out.println("No connection available.");
-            return rows;
-        }
+	public static ArrayList<LinkedHashMap<String, String>> select(Connection con, String sql) {
 
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+		ArrayList<LinkedHashMap<String, String>> resultados = new ArrayList<>();
 
-            ResultSetMetaData meta = rs.getMetaData();
-            int cols = meta.getColumnCount();
+		if (con == null) {
+			System.out.println("No hay conexión. Llama antes a conectarBaseDatos().");
+			return resultados;
+		}
 
-            while (rs.next()) {
-                LinkedHashMap<String, String> row = new LinkedHashMap<>();
-                for (int i = 1; i <= cols; i++) {
-                    row.put(meta.getColumnLabel(i), rs.getString(i));
-                }
-                rows.add(row);
-            }
+		try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
 
-        } catch (SQLException e) {
-            System.out.println("SELECT error: " + e.getMessage());
-        }
+			ResultSetMetaData meta = rs.getMetaData();
+			int numColumnas = meta.getColumnCount();
 
-        return rows;
-    }
+			while (rs.next()) {
+				LinkedHashMap<String, String> fila = new LinkedHashMap<>();
 
-    public static void printRows(Connection conn, String query, String[] columns) {
-        if (conn == null) {
-            System.out.println("No connection available.");
-            return;
-        }
+				for (int i = 1; i <= numColumnas; i++) {
+					String columna = meta.getColumnLabel(i);
+					String valor = rs.getString(i);
+					fila.put(columna, valor);
+				}
 
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+				resultados.add(fila);
+			}
 
-            int count = 0;
-            while (rs.next()) {
-                count++;
-                System.out.println("---- Row " + count + " ----");
-                for (String col : columns) {
-                    System.out.println(col + ": " + rs.getString(col));
-                }
-            }
+		} catch (SQLException e) {
+			System.out.println("Error en SELECT: " + e.getMessage());
+		}
 
-            if (count == 0) System.out.println("No results found.");
+		return resultados;
+	}
 
-        } catch (SQLException e) {
-            System.out.println("SELECT error: " + e.getMessage());
-        }
-    }
+	public static void print(Connection con, String sql, String[] listaElementosSeleccionados) {
+		if (con == null) {
+			System.out.println("No hay conexión. Llama antes a conectarBaseDatos().");
+			return;
+		}
 
-    private static int runWriteQuery(Connection conn, String query, String type) {
-        if (conn == null) {
-            System.out.println("No connection available.");
-            return 0;
-        }
+		try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
 
-        try (Statement stmt = conn.createStatement()) {
-            int affected = stmt.executeUpdate(query);
-            System.out.println(type + " OK. Rows affected: " + affected);
-            return affected;
-        } catch (SQLException e) {
-            System.out.println(type + " failed: " + e.getMessage());
-            return 0;
-        }
-    }
+			int fila = 0;
+			boolean hayResultados = false;
+
+			while (rs.next()) {
+				hayResultados = true;
+				fila++;
+				System.out.println("---- Fila " + fila + " ----");
+				for (String col : listaElementosSeleccionados) {
+					System.out.println(col + ": " + rs.getString(col));
+				}
+			}
+
+			if (!hayResultados) {
+				System.out.println("No se ha encontrado nada");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error en SELECT: " + e.getMessage());
+		}
+	}
+
+	public static int executeInsUpDel(Connection con, String sql, String etiqueta) {
+		if (con == null) {
+			System.out.println("No hay conexión. Llama antes a conectarBaseDatos().");
+			return 0;
+		}
+
+		try (Statement st = con.createStatement()) {
+			int filas = st.executeUpdate(sql);
+			System.out.println(etiqueta + " hecho correctamente. Filas afectadas: " + filas);
+			return filas;
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error en " + etiqueta + ": " + e.getMessage());
+			return 0;
+		}
+	}
 }
