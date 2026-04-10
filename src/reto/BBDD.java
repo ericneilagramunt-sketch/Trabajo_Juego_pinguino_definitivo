@@ -26,7 +26,7 @@ public class Gestor_BBDD {
 				? "jdbc:oracle:thin:@//192.168.3.26:1521/XEPDB2"
 				: "jdbc:oracle:thin:@//oracle.ilerna.com:1521/XEPDB2";
 
-		// 🔐 CREDENCIALES FIJAS (las que me has dado)
+		
 		String user = "DM1_2526_GRUP07";
 		String pwd = "AGRUP07";
 
