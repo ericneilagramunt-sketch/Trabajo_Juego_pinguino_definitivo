@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 public class Pinguino extends Jugador {
     public Pinguino(String nombre, String color) {
         super(nombre, color);

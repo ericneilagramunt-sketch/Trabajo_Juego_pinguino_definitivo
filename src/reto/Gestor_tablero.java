@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 //Esta clase es controladora
 public class GestorTablero {
 

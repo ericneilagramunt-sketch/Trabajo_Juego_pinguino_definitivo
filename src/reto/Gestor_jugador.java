@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 //ESTA CLASE ES CONTROLADOR
 public class Gestor_jugador {
 

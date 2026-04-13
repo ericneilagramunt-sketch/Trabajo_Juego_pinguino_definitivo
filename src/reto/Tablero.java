@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,26 +17,26 @@ public class Tablero {
         for (int i = 1; i < size - 1; i++) {
             int tipo = r.nextInt(6);
             switch (tipo) {
-                case 0:  casillas.add(new oso(i));               break;
-                case 1:  casillas.add(new agujero(i));           break;
-                case 2:  casillas.add(new trineo(i));            break;
-                case 3:  casillas.add(new evento(i));            break;
-                case 4:  casillas.add(new sueloquebradizo(i));   break;
-                default: casillas.add(new normal(i));            break;
+                case 0:  casillas.add(new Oso(i));               break;
+                case 1:  casillas.add(new Agujero(i));           break;
+                case 2:  casillas.add(new Trineo(i));            break;
+                case 3:  casillas.add(new Evento(i));            break;
+                case 4:  casillas.add(new SueloQuebradizo(i));   break;
+                default: casillas.add(new Normal(i));            break;
             }
         }
 
-        casillas.add(new normal(size - 1));
+        casillas.add(new Normal(size - 1));
 
-        for (casilla c : casillas) {
-            if (c instanceof trineo)       ((trineo)       c).setTablero(this);
-            if (c instanceof agujero)      ((agujero)      c).setTablero(this);
-            if (c instanceof evento)       ((evento)       c).setTablero(this);
+        for (Casilla c : casillas) {
+            if (c instanceof Trineo)       ((Trineo)       c).setTablero(this);
+            if (c instanceof Agujero)      ((Agujero)      c).setTablero(this);
+            if (c instanceof Evento)       ((Evento)       c).setTablero(this);
         }
     }
 
 
-    public void activarCasilla(jugador j) {
+    public void activarCasilla(Jugador j) {
         int pos = j.getPosicion();
         if (pos >= 0 && pos < casillas.size()) {
             casillas.get(pos).realizarAccion(j);

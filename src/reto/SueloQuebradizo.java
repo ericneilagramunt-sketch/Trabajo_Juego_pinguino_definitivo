@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 public class Suelo_quebradizo extends Casilla {
 
     public Suelo_quebradizo(int pos) {

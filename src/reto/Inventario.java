@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import java.util.Random;
 import java.util.ArrayList;
 public class Inventario {

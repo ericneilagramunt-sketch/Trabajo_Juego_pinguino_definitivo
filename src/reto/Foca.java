@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import java.util.ArrayList;
 
 public class Foca extends Jugador {

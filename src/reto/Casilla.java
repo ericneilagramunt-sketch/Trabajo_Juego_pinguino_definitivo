@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 
 public abstract class Casilla {
 	 protected int posicion;

@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 
 public class Pez extends Item {
 

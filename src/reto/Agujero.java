@@ -1,7 +1,8 @@
-package reto;
+package src.reto;
+
 public class Agujero extends Casilla {
 
-    private tablero tablero;
+    private Tablero tablero;
 
     public Agujero(int pos) {
         super(pos);

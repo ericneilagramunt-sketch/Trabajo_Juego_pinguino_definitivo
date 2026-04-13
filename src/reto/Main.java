@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import javax.swing.SwingUtilities;
 
 public class Main {

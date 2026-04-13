@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import java.util.Random;
 public class Dado {
   private int min;

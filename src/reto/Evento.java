@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import java.util.*;
 
 public class Evento extends Casilla {

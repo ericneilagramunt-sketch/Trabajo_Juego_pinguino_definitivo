@@ -1,4 +1,4 @@
-package reto;
+package src.reto;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
