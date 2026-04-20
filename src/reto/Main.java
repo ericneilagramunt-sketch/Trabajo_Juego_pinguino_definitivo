@@ -1,6 +1,8 @@
 package src.reto;
 import javax.swing.SwingUtilities;
 
+import src.vista.Gestor_partida;
+
 public class Main {
 
     public static void Main(String[] args) {

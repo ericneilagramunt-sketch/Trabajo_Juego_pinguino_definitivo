@@ -3,6 +3,8 @@ package src.reto;
 import java.util.ArrayList;
 import java.util.Random;
 
+import clases_modelo.Agujero;
+
 
 public class Tablero {
 

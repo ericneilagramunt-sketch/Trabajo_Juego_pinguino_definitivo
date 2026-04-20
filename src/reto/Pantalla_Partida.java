@@ -1,5 +1,8 @@
 package src.reto;
 import javax.swing.*;
+
+import src.vista.Gestor_partida;
+
 import java.awt.*;
 import java.util.ArrayList;
 //Esta clase es vista

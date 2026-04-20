@@ -1,5 +1,7 @@
 package src.reto;
 
+import src.vista.Gestor_partida;
+
 public class Pez extends Item {
 
     public Pez() {
